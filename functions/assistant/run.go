@@ -40,8 +40,7 @@ func (a *assistant) Run(ctx context.Context, event firestoreModels.EventDto) err
 	}
 
 	//TODO: handle different event types
-	//meta.EventType = "google.firestore.document.write"
-	log.Printf("Function triggered by change to: %v\n", *meta.Resource)
+	log.Printf("Function triggered by: %v\n", meta.EventType)
 
 	lastIndex := len(event.Value.Fields.Messages.ArrayValue.Values) - 1
 
