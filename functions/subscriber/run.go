@@ -32,7 +32,7 @@ func (s *subscriber) Run(ctx context.Context, w http.ResponseWriter, r *http.Req
 		return
 	}
 
-	event, err := slackevents.ParseEvent(body, slackevents.OptionNoVerifyToken())
+	event, err := slackevents.ParseEvent(json.RawMessage(body), slackevents.OptionNoVerifyToken())
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
