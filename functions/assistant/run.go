@@ -45,6 +45,13 @@ func (a *assistant) Run(ctx context.Context, event firestoreModels.EventDto) err
 
 	lastIndex := len(event.Value.Fields.Messages.ArrayValue.Values) - 1
 
+	roleText := event.Value.Fields.Messages.ArrayValue.Values[lastIndex].MapValue.Fields.Role.StringValue
+
+	if roleText == "Assistant" {
+		log.Printf("Ignored Assistant message\n")
+		return nil
+	}
+
 	messageText := event.Value.Fields.Messages.ArrayValue.Values[lastIndex].MapValue.Fields.Text.StringValue
 
 	response, err := a.OpenAIService.GetChatCompletion(messageText)
