@@ -8,7 +8,6 @@ import (
 	"github.com/jmrosh/go-genai-slack-app/functions/assistant"
 	"github.com/jmrosh/go-genai-slack-app/functions/subscriber"
 	firestoreModels "github.com/jmrosh/go-genai-slack-app/models/firestore"
-	"github.com/joho/godotenv"
 	"github.com/sashabaranov/go-openai"
 	"github.com/slack-go/slack"
 	"log"
@@ -40,7 +39,6 @@ func Assistant(ctx context.Context, e firestoreModels.EventDto) error {
 }
 
 func Subscriber(w http.ResponseWriter, r *http.Request) {
-	godotenv.Load()
 	firestoreClient, err := firestore.NewClient(r.Context(), os.Getenv("PROJECT_ID"))
 	if err != nil {
 		log.Printf("services.NewFirestoreClient: %v\n", err)
